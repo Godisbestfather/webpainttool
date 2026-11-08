@@ -1,0 +1,227 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Inkover design system — "sketchbook": warm paper, ink-black outlines,
+ * hard offset shadows and bold marker colors.
+ */
+
+@theme inline {
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-marker-red: var(--marker-red);
+  --color-marker-yellow: var(--marker-yellow);
+  --color-marker-blue: var(--marker-blue);
+  --color-marker-green: var(--marker-green);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --shadow-hard: 4px 4px 0 var(--ink);
+  --shadow-hard-lg: 7px 7px 0 var(--ink);
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+}
+
+:root {
+  --radius: 0.875rem;
+  --ink: oklch(0.21 0.015 280);
+  --paper: oklch(0.97 0.018 85);
+  --marker-red: oklch(0.63 0.2 32);
+  --marker-yellow: oklch(0.89 0.17 98);
+  --marker-blue: oklch(0.6 0.18 258);
+  --marker-green: oklch(0.68 0.15 155);
+
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: oklch(0.985 0.012 85);
+  --card-foreground: var(--ink);
+  --popover: oklch(0.985 0.012 85);
+  --popover-foreground: var(--ink);
+  --primary: var(--marker-red);
+  --primary-foreground: oklch(0.99 0.01 85);
+  --secondary: oklch(0.93 0.03 85);
+  --secondary-foreground: var(--ink);
+  --muted: oklch(0.93 0.025 85);
+  --muted-foreground: oklch(0.47 0.02 70);
+  --accent: var(--marker-yellow);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0.01 85);
+  --border: var(--ink);
+  --input: oklch(0.85 0.03 85);
+  --ring: var(--marker-blue);
+  --grid-line: oklch(0.88 0.03 85);
+  --chart-1: var(--marker-red);
+  --chart-2: var(--marker-blue);
+  --chart-3: var(--marker-green);
+  --chart-4: var(--marker-yellow);
+  --chart-5: oklch(0.6 0.2 320);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--marker-red);
+  --sidebar-primary-foreground: oklch(0.99 0.01 85);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--ink);
+  --sidebar-ring: var(--marker-blue);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+
+  ::selection {
+    background: var(--marker-yellow);
+    color: var(--ink);
+  }
+}
+
+@utility paper-grid {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Marker-highlight behind inline text */
+@utility highlight {
+  background: linear-gradient(
+    100deg,
+    transparent 2%,
+    color-mix(in oklch, var(--marker-yellow) 85%, transparent) 4%,
+    color-mix(in oklch, var(--marker-yellow) 85%, transparent) 96%,
+    transparent 98%
+  );
+  background-size: 100% 55%;
+  background-position: 0 85%;
+  background-repeat: no-repeat;
+  padding: 0 0.12em;
+}
+
+@utility sketch-card {
+  background: var(--card);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-hard);
+}
+
+@layer components {
+  .btn-ink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    padding: 0.9rem 1.6rem;
+    font-weight: 700;
+    font-family: var(--font-display);
+    box-shadow: var(--shadow-hard);
+    transition:
+      transform 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+  .btn-ink:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: var(--shadow-hard-lg);
+  }
+  .btn-ink:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 var(--ink);
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+  .btn-paper {
+    background: var(--card);
+    color: var(--ink);
+  }
+  .kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 1.75rem;
+    height: 1.75rem;
+    padding: 0 0.45rem;
+    border: 2px solid var(--ink);
+    border-bottom-width: 4px;
+    border-radius: 0.45rem;
+    background: var(--card);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
